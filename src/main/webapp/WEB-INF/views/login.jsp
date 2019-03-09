@@ -1,4 +1,6 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%request.setCharacterEncoding("UTF-8");%>
 <html>
 <head>
     <title>Title</title>
@@ -9,13 +11,13 @@
 
     <form action="" method="post">
         <label>
-            Введите ваше имя
+            <spring:message code="name.input"/>
             <input type="text" name="name"/>
         </label>
         <br>
         <br>
         <label>
-            Введите вашу фамилию
+            <spring:message code="surname.input"/>
             <input type="text" name="surname"/>
         </label>
         <br>

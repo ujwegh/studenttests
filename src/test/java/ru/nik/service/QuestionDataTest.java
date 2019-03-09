@@ -1,10 +1,21 @@
 package ru.nik.service;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.ComponentScan;
 import ru.nik.domain.Question;
+import ru.nik.utils.Util;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 public class QuestionDataTest {
+
+    @Value("classpath:questions/file_en.csv")
+    private static File enQuestions;
+
+    @Value("classpath:questions/file_ru.csv")
+    private static File ruQuestions;
 
     public static List<Question> getTestData() {
         Question q1 = new Question(1, "Сколько будет 2+2?",
@@ -24,5 +35,9 @@ public class QuestionDataTest {
                 "что-то еще");
 
         return new ArrayList<>(Arrays.asList(q1, q2, q3, q4, q5));
+    }
+
+    public static List<Question> getEnQuestions() throws IOException {
+        return Util.parseCSV(enQuestions.getPath());
     }
 }

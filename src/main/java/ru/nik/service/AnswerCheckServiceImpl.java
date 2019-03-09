@@ -1,9 +1,11 @@
 package ru.nik.service;
 
+import org.springframework.stereotype.Service;
 import ru.nik.domain.Question;
 
 import java.util.List;
 
+@Service
 public class AnswerCheckServiceImpl implements AnswerCheckService {
 
     @Override

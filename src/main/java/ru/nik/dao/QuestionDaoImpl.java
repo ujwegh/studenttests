@@ -1,38 +1,36 @@
 package ru.nik.dao;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Repository;
 import ru.nik.domain.Question;
 import ru.nik.utils.Util;
 
 import java.io.File;
 import java.util.List;
 
+@Repository
 public class QuestionDaoImpl implements QuestionDao {
 
-    @Override
-    public Question findById(int id) {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File file = new File(classLoader.getResource("questions/file.csv").getFile());
-            List<Question> questions = Util.parseCSV(file.getPath());
-            for (Question q : questions) {
-                if (q.getId() == id) {
-                    return q;
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    @Value("classpath:questions/file_en.csv")
+    private File enQuestions;
 
-
-        return null;
-    }
+    @Value("classpath:questions/file_ru.csv")
+    private File ruQuestions;
 
     @Override
     public List<Question> getAllQuestions() {
         try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File file = new File(classLoader.getResource("questions/file.csv").getFile());
-            return Util.parseCSV(file.getPath());
+            return Util.parseCSV(this.enQuestions.getPath());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public List<Question> getAllRuQuestions() {
+        try {
+            return Util.parseCSV(this.ruQuestions.getPath());
         } catch (Exception e) {
             e.printStackTrace();
         }
