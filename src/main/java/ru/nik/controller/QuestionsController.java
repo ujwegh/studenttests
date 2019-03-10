@@ -21,7 +21,7 @@ public class QuestionsController {
 
     private final AnswerCheckService answerCheckService;
 
-    private Person person;
+    private Person person = new Person("", "");
 
     @Autowired
     public QuestionsController(QuestionService questionService, AnswerCheckService answerCheckService) {

@@ -11,11 +11,11 @@ import java.util.*;
 
 public class QuestionDataTest {
 
-    @Value("classpath:questions/file_en.csv")
-    private static File enQuestions;
-
-    @Value("classpath:questions/file_ru.csv")
-    private static File ruQuestions;
+//    @Value("classpath:questions/file_en.csv")
+//    private static File enQuestions;
+//
+//    @Value("classpath:questions/file_ru.csv")
+//    private static File ruQuestions;
 
     public static List<Question> getTestData() {
         Question q1 = new Question(1, "Сколько будет 2+2?",
@@ -38,6 +38,14 @@ public class QuestionDataTest {
     }
 
     public static List<Question> getEnQuestions() throws IOException {
-        return Util.parseCSV(enQuestions.getPath());
+        ClassLoader classLoader = QuestionDataTest.class.getClassLoader();
+        File file = new File(classLoader.getResource("questions/file_en.csv").getFile());
+        return Util.parseCSV(file.getPath());
+    }
+
+    public static List<Question> getRuQuestions() throws IOException {
+        ClassLoader classLoader = QuestionDataTest.class.getClassLoader();
+        File file = new File(classLoader.getResource("questions/file_ru.csv").getFile());
+        return Util.parseCSV(file.getPath());
     }
 }
