@@ -9,12 +9,11 @@ import ru.nik.domain.Question;
 import ru.nik.service.AnswerCheckService;
 import ru.nik.service.QuestionService;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 import java.util.*;
 
-@Controller(value = "/")
+@Controller(value = "/login")
 public class QuestionsController {
 
     private final QuestionService questionService;
@@ -27,11 +26,6 @@ public class QuestionsController {
     public QuestionsController(QuestionService questionService, AnswerCheckService answerCheckService) {
         this.questionService = questionService;
         this.answerCheckService = answerCheckService;
-    }
-
-    @GetMapping
-    public String root() {
-        return "redirect:/login";
     }
 
     @GetMapping(value = "/login")

@@ -1,17 +1,13 @@
 package ru.nik.controller;
 
-import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -36,6 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebAppConfiguration
 @ContextConfiguration(classes = {SpringConfig.class, WebConfig.class})
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@SpringBootTest
 class QuestionsControllerTest {
 
     private static final CharacterEncodingFilter CHARACTER_ENCODING_FILTER = new CharacterEncodingFilter();
@@ -104,8 +101,8 @@ class QuestionsControllerTest {
                     .param("answer 5", answers.get(4)))
                     .andDo(print())
                     .andExpect(status().isOk())
-                    .andExpect(model().attribute("name", ""))
-                    .andExpect(model().attribute("surname", ""))
+                    .andExpect(model().attribute("name", "вася"))
+                    .andExpect(model().attribute("surname", "пупкин"))
                     .andExpect(forwardedUrl("/WEB-INF/views/congrats.jsp"));
     }
 }

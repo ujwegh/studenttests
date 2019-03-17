@@ -13,7 +13,7 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 @ComponentScan("ru.nik")
 @EnableWebMvc
-public class SpringConfig extends WebMvcConfigurerAdapter {
+public class SpringConfig implements WebMvcConfigurer {
 
     @Bean
     public InternalResourceViewResolver getInternalResourceViewResolver() {
@@ -37,7 +37,6 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        super.addViewControllers(registry);
         registry.addViewController("/").setViewName("redirect:/login");
     }
 
