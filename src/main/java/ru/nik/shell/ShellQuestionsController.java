@@ -12,7 +12,6 @@ import ru.nik.service.QuestionService;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -53,8 +52,7 @@ public class ShellQuestionsController {
             return "Your name is empty! Please input your full name first!";
         } else {
             List<Question> questions;
-            List<String> answers = new ArrayList<>();
-            List<String> rightAnswers = new ArrayList<>();
+            List<String> answers;
             System.out.println("Please input an answer completely");
             if (locale.equals("ru")) {
                 questions = questionService.getAllRuQuestions();

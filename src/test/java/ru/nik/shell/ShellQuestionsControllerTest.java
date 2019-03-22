@@ -1,5 +1,6 @@
 package ru.nik.shell;
 
+import java.io.ByteArrayInputStream;
 import org.junit.Before;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -62,11 +63,12 @@ class ShellQuestionsControllerTest {
 
     @Test
     void questions() {
+        ByteArrayInputStream in = new ByteArrayInputStream("My string".getBytes());
+        System.setIn(in);
         controller.locale("ru");
         controller.fullname("вася", "пупкин");
         String result = controller.questions();
-
-
-
+        assertNotNull(result);
+        System.setIn(System.in);
     }
 }
