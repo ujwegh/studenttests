@@ -34,24 +34,23 @@ public class ShellQuestionsController {
     }
 
     @ShellMethod("fullname")
-    public void fullname(@ShellOption String name, @ShellOption String surname) {
+    public String fullname(@ShellOption String name, @ShellOption String surname) {
         this.person = new Person(name, surname);
-        System.out.println("You have successfully input '" + person.toString() + "' person");
-
+        return "You have successfully input '" + person.toString() + "' person";
     }
 
-    @ShellMethod("start")
-    public void locale(@ShellOption String locale) {
+    @ShellMethod("locale")
+    public String locale(@ShellOption String locale) {
         this.locale = locale;
-        System.out.println("You have successfully input '" + locale + "' locale");
+        return "You have successfully input '" + locale + "' locale";
     }
 
     @ShellMethod("questions")
-    public void questions() {
+    public String questions() {
         if (locale == null) {
-            System.out.println("Locale is null! Please input locale first!");
+            return "Locale is null! Please input locale first!";
         } else if (person == null) {
-            System.out.println("Your name is empty! Please input your full name first!");
+            return "Your name is empty! Please input your full name first!";
         } else {
             List<Question> questions;
             List<String> answers = new ArrayList<>();
@@ -64,9 +63,8 @@ public class ShellQuestionsController {
                 questions = questionService.getAllQuestions();
                 answers = questions.stream().map(this::answerTheQuestion).collect(Collectors.toList());
             }
-            System.out.println("Congratulations!!!");
             double score = answerCheckService.checkAnswers(questions, answers);
-            System.out.println(person.getName() + " " + person.getSurname()+", your score is " + score);
+            return "Congratulations!!!\n" + person.getName() + " " + person.getSurname()+", your score is " + score;
         }
     }
 
