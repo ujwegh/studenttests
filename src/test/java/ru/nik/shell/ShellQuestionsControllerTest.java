@@ -68,7 +68,10 @@ class ShellQuestionsControllerTest {
         controller.locale("ru");
         controller.fullname("вася", "пупкин");
         String result = controller.questions();
+        System.out.println( result);
         assertNotNull(result);
+        assertEquals("Congratulations!!!\n"
+            + "вася пупкин, your score is 0.0", result);
         System.setIn(System.in);
     }
 }
